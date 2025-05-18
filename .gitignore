@@ -1,0 +1,13 @@
+# Eclipse
+.classpath
+.project
+.settings/
+
+# Archivos compilados
+bin/
+
+# Archivos comprimidos
+*.zip
+
+# Archivos de documentación generada
+doc/

@@ -1,0 +1,171 @@
+//www.plantuml.com/plantuml/png/jLZDRXit4BxhAOYSTX4rG78K2YEguxOfcbHmWboA7cQvOvdkYjoINAD5a7Vl_d1Cxd9MTWtK5rdyPZxE_n1wwpnOtvsQpQO5-ISSKRGM7MeFKXajlcusel-J3JWdhkvGTjxO_bI4lvVY14eNdxnL-lZx7mBiqPKxSMzKFSfyI_K_eEuElQ1KBJG9oNVYamIjqGhKta8D2L8Pqo1e8OtsIdTW4snlBVppgtB--qjpgi3ZXRZjlnche4ajDAvdjSFjnSAsRz7jnXoL178Oga57-c1vu9_PV43hZ8Ox57VT4MfZNvy3toJW52rnW_8MycElMdC0wrNDW4VGFHiVX4daGk0zQc_S9eQ0x2zAvYo_DfKAA3Xrr60_zZeM7vmh5dbB5MlJLGsIug4RJ8gAHDj_L9qt4-zMhFCb4PKMmJx5XZ7Lb83Wxc_jKDT5P6lfF_xsb2aMaklbtslLKr4KyshOCaMm5TUWQtCITlnOk-6NIHpT5rN3awcLzi9tLfkF6M-DDqeh-zDKFSMycDOqIGhzZqEb5Xch8oGjQ9xXSwmkbYV1-O9aECaRZe_tD95a-gQdl9fQXwKaRBNX-6hjMKCwNxEq139fVepm3Kz8O5uZV1olqNKdr3aPEWzLWn8jNm1Khk_GGzDWm6dafuFpS7yby6-FkcPdQMW7iGlj4H7gHR6Zxdp04cFYBQcDYq7nW_55EuwXpyP3Wqximf0gnIx6Dz6lZ9zFZPQ4KeLIn9qI5DKm6i3IR9X9yE4vF24ywz79W_CoePx7v1Qqn0z6Omt5KdsxkAdSqVuzurpkrS-qX5CdRkbmn-pjAEOcInYF7bYBaZiyoxyLIzw40uuMZs1f_CX9PqSHB9VfdLSzgMLYsAYJqf5tZUV1XR4FLMtcZnJsFH9R-sl-Hj3ZCitEHzNac3RqlVBGg1hg708FVtMCogoDECOQzj9tqEH6W1mwQSDDjg9aJsTURJEhjtDZKmvwErgKgb9sFmeKGVmTQ6KuQV0WmIRJqxH6e_QuDlxUwnjJPA3iUgZW9-xqt66cDq5pfvbdLK_oXIB0yaHq6J2UBGI7eI8e2pDd4YMU8qhXh5BuGEt7Qk7829gL5KzosO3ZF2CaRG_UhqDQxopJN89h4sPExcqVIMjezFDTZVVWbD6qgoAmiXHU1jQYp8-cSjg5s6nZJH3xDgGtVbzSdv3Eksfi9vBYzaRIBFae79zUuCPS4qb4NKINvgmjrhr3f_GZePrylRJAAsdo0BVML52fCK2yq9ai10EACZjwJXPOKmXatKZk3GEDnbXykZmhJ_lqDZvR2ndUFeRwa7l9Ni1ByZ4wNoO7QA1M-doPM7JAzRXKa1iJ68eoEtfEdjEh_lUEkuwNiM6UIt2chJvhkw4j7XrjWMPSbLAPnFJ8K9JSwNzy56oNDvtVrlo6vrV3ODBQZeeWSptz_lJmezghLnUBNyXsuaNduCLcVjhBnHVsgWYzNac0D5WmV1sWc2a2DszHrzsf-HS0
+
+Código:
+
+@startuml
+
+package presentacion {
+
+    class Ejecutor {
+        + main(String[] args): void
+    }
+
+    class MenuPrincipal {
+        - Scanner entrada
+        - boolean continuar
+        - ArrayList<Combate> historial
+        + mostrarMenu(): void
+    }
+
+}
+
+package logica {
+
+    abstract class Combate {
+        - Personaje jugador1
+        - Personaje jugador2
+        - String fecha
+        - String tipoPartida
+        - String ganador
+        - ArrayList<String> eventos
+
+        + Combate()
+        + Combate(String tipoPartida)
+        + String asignarNombrePersonaje(Scanner entrada)
+        + double asignarPuntosPersonaje(String atributoNombre, Scanner entrada)
+        + Personaje crearPersonaje(Scanner entrada)
+        + void jugadorCombateOpcion(Personaje personaje, Scanner entrada)
+        + void mostrarMensajeInicioCombate(Personaje jugador1, Personaje jugador2, Random random)
+        + void mostrarJugadoresVida(Personaje jugador1, Personaje jugador2, int turnoN)
+        + void definirGanador(String ganador, int turnoN)
+        + String getFecha()
+        + void setFecha(String fecha)
+        + String getTipoPartida()
+        + void setTipoPartida(String tipoPartida)
+        + String getGanador()
+        + void setGanador(String ganador)
+        + ArrayList<String> getEventos()
+        + void setEventos(ArrayList<String> eventos)
+        + Personaje getJugador1()
+        + void setJugador1(Personaje jugador1)
+        + Personaje getJugador2()
+        + void setJugador2(Personaje jugador2)
+        + String getResumen()
+        + void establecerFecha()
+        + void mostrarDetalle()
+    }
+
+    class CombatePvE extends Combate {
+        - random : Random
+        - entrada : Scanner
+        
+        + CombatePvE()
+        + crearPersonajeBot(puntosTotales : double) : Personaje
+        + botCombateOpcion(personaje : Personaje) : void
+        + iniciarCombate() : void
+    }
+
+    class CombatePvP extends Combate {
+        - random: Random
+        - entrada: Scanner
+        + CombatePvP()
+        + chanceMoneda(entrada: Scanner, random: Random): boolean
+        + iniciarCombate()
+    }
+
+    class Historial {
+        -historial: ArrayList<Combate>
+        -scanner: Scanner
+        +Historial()
+        +Historial(historial: ArrayList<Combate>, scanner: Scanner)
+        +agregarPartida(combate: Combate): void
+        +mostrarDetallePartida(): void
+        +eliminarPartida(): void
+        +mostrarHistorialResumido(): void
+    }
+
+    abstract class Personaje {
+        - String nombre
+        - String clase
+        - double vitalidad
+        - double ataque
+        - double puntosTotales
+        - double vidaActual
+        - String accion
+
+        + Personaje()
+        + Personaje(String nombre, double vitalidad, double ataque)
+        + boolean recibirAtaque(double Danio)
+        + boolean atacar(Personaje oponente)
+        + void mostrarInfo()
+        + void curar()
+        + String getNombre()
+        + void setNombre(String nombre)
+        + double getVitalidad()
+        + void setVitalidad(double vitalidad)
+        + double getAtaque()
+        + void setAtaque(double ataque)
+        + double getVidaActual()
+        + void setVidaActual(double vidaActual)
+        + String getAccion()
+        + void setAccion(String accion)
+        + String getClase()
+        + void setClase(String clase)
+        + double getPuntosTotales()
+        + void setPuntosTotales(double puntosTotales)
+    }
+
+    class Arquero extends Personaje {
+        -evasion: double
+        -random: Random
+        +Arquero()
+        +Arquero(nombre: String, vitalidad: double, ataque: double, evasion: double)
+        +recibirAtaque(Danio: double): boolean
+        +mostrarInfo(): void
+        +getEvasion(): double
+        +setEvasion(evasion: double): void
+    }
+
+    class Asesino extends Personaje {
+        -ataqueCritico: double
+        -probabilidadCritico: double
+        -random: Random
+        +Asesino()
+        +Asesino(nombre: String, vitalidad: double, ataque: double, probabilidadCritico: double, ataqueCritico: double)
+        +atacar(oponente: Personaje): boolean
+        +mostrarInfo(): void
+        +getAtaqueCritico(): double
+        +setAtaqueCritico(ataqueCritico: double): void
+        +getProbabilidadCritico(): double
+        +setProbabilidadCritico(probabilidadCritico: double): void
+    }
+
+    class Paladin extends Personaje {
+        -resistencia: double
+        +Paladin()
+        +Paladin(nombre: String, vitalidad: double, ataque: double, resistencia: double)
+        +recibirAtaque(Danio: double): boolean
+        +mostrarInfo(): void
+        +getResistencia(): double
+        +setResistencia(resistencia: double): void
+    }
+
+    class Curandero extends Personaje {
+        - double curacion
+        + Curandero()
+        + Curandero(String nombre, double vitalidad, double ataque, double curacion)
+        + void curar()
+        + void mostrarInfo()
+        + double getCuracion()
+        + void setCuracion(double curacion)
+    }
+
+}
+
+Ejecutor ..> MenuPrincipal : "usa"
+MenuPrincipal ..> Historial: "usa"
+MenuPrincipal ..> Combate: "usa"
+Historial ..> Combate: "usa"
+Combate ..> Personaje: "usa"
+
+@enduml
